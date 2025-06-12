@@ -18,7 +18,7 @@ interface Product {
 
 const sampleProduct: Product[] = [];
 
-for (let i = 1; i <= 20; i++) {
+for (let i = 1; i <= 44; i++) {
   sampleProduct.push({
     _id: `prod-${i.toString().padStart(3, "0")}`, // prod-001, prod-002, etc.
     image:

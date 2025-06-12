@@ -10,19 +10,19 @@ export default function Navbar() {
     <nav className="bg-blue-600 p-4 flex justify-center gap-6">
       <button
         onClick={() => router.push("/")}
-        className="text-white font-semibold px-4 py-2 rounded hover:bg-blue-700 transition"
+        className="text-white font-semibold px-4 py-2 rounded hover:bg-blue-700 transition cursor-pointer"
       >
         Products
       </button>
       <button
         onClick={() => router.push("/checkout")}
-        className="text-white font-semibold px-4 py-2 rounded hover:bg-blue-700 transition"
+        className="text-white font-semibold px-4 py-2 rounded hover:bg-blue-700 transition cursor-pointer"
       >
         Checkout
       </button>
       <button
         onClick={() => router.push("/cart")}
-        className="text-white font-semibold px-4 py-2 rounded hover:bg-blue-700 transition"
+        className="text-white font-semibold px-4 py-2 rounded hover:bg-blue-700 transition cursor-pointer"
       >
         Cart
       </button>

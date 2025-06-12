@@ -1,5 +1,6 @@
 "use client";
 
+import EmptyCart from "@/model/emptyCart";
 import { useCartStore } from "@/store/cardStore";
 import { useRouter } from "next/navigation";
 
@@ -17,7 +18,7 @@ export default function CartPage() {
       <h1 className="text-2xl font-bold mb-6">Your Cart</h1>
 
       {cartItems.length === 0 ? (
-        <p>Your cart is empty.</p>
+        <EmptyCart />
       ) : (
         <>
           <div className="space-y-4">

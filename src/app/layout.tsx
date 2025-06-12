@@ -1,6 +1,7 @@
 import Navbar from "@/component/navbar";
 import "./globals.css";
 import Footer from "@/component/footer";
+import ScrollButton from "@/component/scrollButton";
 
 export const metadata = {
   title: "My Mini Ecommerce",
@@ -18,6 +19,7 @@ export default function RootLayout({
         <Navbar />
         {children}
         <Footer />
+        <ScrollButton />
       </body>
     </html>
   );
