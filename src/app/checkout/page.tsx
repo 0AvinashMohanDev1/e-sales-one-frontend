@@ -87,11 +87,13 @@ export default function CheckoutPage() {
         {/* Left: Form */}
         <form
           onSubmit={formik.handleSubmit}
-          className="w-full md:w-2/3 space-y-4"
+          className="w-full md:w-2/3 space-y-4 text-black"
         >
-          <h1 className="text-2xl font-bold mb-4">Checkout</h1>
+          <h1 className="text-2xl font-bold mb-4 text-black">Checkout</h1>
           {/* Contact Section */}
-          <h2 className="text-lg font-semibold mt-4 mb-2">Contact Details</h2>
+          <h2 className="text-lg font-semibold mt-4 mb-2 text-black">
+            Contact Details
+          </h2>
           <div className="space-y-4">
             {[
               { name: "fullName", placeholder: "Full Name" },
