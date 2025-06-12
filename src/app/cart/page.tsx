@@ -45,7 +45,7 @@ export default function CartPage() {
                 </div>
                 <button
                   onClick={() => removeFromCart(item._id)}
-                  className="text-red-600 hover:underline"
+                  className="text-red-600 hover:underline cursor-pointer"
                 >
                   Remove
                 </button>
@@ -58,7 +58,7 @@ export default function CartPage() {
           </div>
           <div className="flex justify-center mt-4">
             <button
-              className="px-5 py-2 rounded-md border border-gray-500 bg-white text-gray-700 hover:bg-gray-100 transition"
+              className="px-5 py-2 rounded-md border border-gray-500 bg-white text-gray-700 hover:bg-gray-100 transition cursor-pointer"
               onClick={() => router.push("/checkout")}
             >
               Checkout
