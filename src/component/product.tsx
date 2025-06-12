@@ -107,7 +107,7 @@ export default function ProductCard({ product }: Props) {
 
       {showModal && (
         <div className="fixed inset-0 bg-black/60 z-50 flex items-center justify-center p-4">
-          <div className="bg-white max-w-md w-full rounded-xl shadow-lg p-6 relative">
+          <div className="bg-white text-black max-w-md w-full rounded-xl shadow-lg p-6 relative">
             <h3 className="text-lg font-bold mb-3 text-gray-800">
               Customize your product
             </h3>
