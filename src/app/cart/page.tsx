@@ -34,11 +34,11 @@ export default function CartPage() {
                     className="w-20 h-20 object-cover rounded"
                   />
                   <div>
-                    <h2 className="font-bold">{item.title}</h2>
+                    <h2 className="font-bold text-black">{item.title}</h2>
                     <p className="text-sm text-gray-600">
                       {item.selectedColor} / {item.selectedSize}
                     </p>
-                    <p>
+                    <p className="text-black">
                       {item.currency} {item.price.toFixed(2)} × {item.quantity}
                     </p>
                   </div>
