@@ -32,9 +32,11 @@ export default function ProductCard({ product }: Props) {
 
   const [showModal, setShowModal] = useState(false);
   const [selectedColor, setSelectedColor] = useState(
-    product.defaultVariant.color
+    product.defaultVariant.color || product.variants.color[0] || ""
   );
-  const [selectedSize, setSelectedSize] = useState(product.defaultVariant.size);
+  const [selectedSize, setSelectedSize] = useState(
+    product.defaultVariant.size || product.variants.size[0] || ""
+  );
   const [quantity, setQuantity] = useState(1);
   const [error, setError] = useState("");
 
@@ -53,13 +55,12 @@ export default function ProductCard({ product }: Props) {
     });
     setShowModal(false);
     alert(
-      `Added ${quantity} x ${product.title} (${selectedColor}, ${selectedSize}) to cart.`
+      `✅ Added ${quantity} x ${product.title} (${selectedColor}, ${selectedSize}) to cart.`
     );
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const val = Number(e.target.value);
-
     if (val > 5) {
       setQuantity(5);
       setError("Maximum quantity allowed is 5.");
@@ -120,6 +121,7 @@ export default function ProductCard({ product }: Props) {
             </h4>
             <p className="text-sm text-gray-600 mb-4">{product.description}</p>
 
+            {/* Color Selector */}
             <div className="mb-3">
               <label className="block text-sm font-medium mb-1 text-gray-700">
                 Color
@@ -137,6 +139,7 @@ export default function ProductCard({ product }: Props) {
               </select>
             </div>
 
+            {/* Size Selector */}
             <div className="mb-3">
               <label className="block text-sm font-medium mb-1 text-gray-700">
                 Size
@@ -154,6 +157,7 @@ export default function ProductCard({ product }: Props) {
               </select>
             </div>
 
+            {/* Quantity Selector */}
             <div className="mb-3">
               <label className="block text-sm font-medium mb-1 text-gray-700">
                 Quantity
@@ -173,6 +177,7 @@ export default function ProductCard({ product }: Props) {
               </p>
             </div>
 
+            {/* Buttons */}
             <div className="flex flex-col sm:flex-row justify-end gap-2 sm:gap-4 mt-4">
               <button
                 onClick={() => setShowModal(false)}
