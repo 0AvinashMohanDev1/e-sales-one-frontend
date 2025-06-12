@@ -56,6 +56,7 @@ export default function ProductCard({ product }: Props) {
       `Added ${quantity} x ${product.title} (${selectedColor}, ${selectedSize}) to cart.`
     );
   };
+
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const val = Number(e.target.value);
 
@@ -73,53 +74,60 @@ export default function ProductCard({ product }: Props) {
 
   return (
     <>
-      <div className="max-w-sm rounded overflow-hidden shadow-lg bg-white p-4">
+      <div className="bg-white rounded-xl shadow-md hover:shadow-lg transition overflow-hidden max-w-sm">
         <img
           src={product.image}
           alt={product.title}
-          className="w-full h-48 object-cover rounded-md mb-4"
+          className="w-full h-52 object-cover"
         />
-        <h2 className="font-bold text-xl mb-2">{product.title}</h2>
-        <p className="text-gray-700 text-sm mb-4">{product.description}</p>
 
-        <p className="text-lg font-semibold mb-4">
-          {product.currency} {formattedPrice}
-        </p>
+        <div className="p-4">
+          <h2 className="font-bold text-lg text-gray-900">{product.title}</h2>
+          <p className="text-gray-600 text-sm mt-1 line-clamp-2">
+            {product.description}
+          </p>
+          <div className="mt-3 text-gray-800 font-semibold text-base">
+            {product.currency} {formattedPrice}
+          </div>
 
-        <button
-          disabled={product.stock === 0}
-          onClick={() => setShowModal(true)}
-          className={`w-full py-2 rounded-md text-white font-semibold ${
-            product.stock === 0
-              ? "bg-gray-400 cursor-not-allowed"
-              : "bg-blue-600 hover:bg-blue-700"
-          } transition`}
-        >
-          {product.stock === 0 ? "Out of Stock" : "Choose Options"}
-        </button>
+          <button
+            disabled={product.stock === 0}
+            onClick={() => setShowModal(true)}
+            className={`mt-4 w-full py-2 rounded-lg text-white font-medium text-sm transition ${
+              product.stock === 0
+                ? "bg-gray-400 cursor-not-allowed"
+                : "bg-indigo-600 hover:bg-indigo-700 cursor-pointer"
+            }`}
+          >
+            {product.stock === 0 ? "Out of Stock" : "Choose Options"}
+          </button>
+        </div>
       </div>
 
-      {/* Modal */}
       {showModal && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center">
-          <div className="bg-white p-6 rounded-lg shadow-md max-w-md w-full">
-            <h3 className="text-lg font-semibold mb-4">
+        <div className="fixed inset-0 bg-black/60 z-50 flex items-center justify-center p-4">
+          <div className="bg-white max-w-md w-full rounded-xl shadow-lg p-6 relative">
+            <h3 className="text-lg font-bold mb-3 text-gray-800">
               Customize your product
             </h3>
             <img
               src={product.image}
               alt={product.title}
-              className="w-full h-48 object-cover rounded-md mb-4"
+              className="w-full h-48 object-cover rounded-md mb-3"
             />
-            <h2 className="font-bold text-xl mb-2">{product.title}</h2>
-            <p className="text-gray-700 text-sm mb-4">{product.description}</p>
+            <h4 className="text-md font-semibold text-gray-900 mb-1">
+              {product.title}
+            </h4>
+            <p className="text-sm text-gray-600 mb-4">{product.description}</p>
 
-            <div className="mb-4">
-              <label className="block mb-1 font-medium">Color:</label>
+            <div className="mb-3">
+              <label className="block text-sm font-medium mb-1 text-gray-700">
+                Color
+              </label>
               <select
                 value={selectedColor}
                 onChange={(e) => setSelectedColor(e.target.value)}
-                className="w-full border border-gray-300 rounded-md p-2"
+                className="w-full border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-1 focus:ring-indigo-500"
               >
                 {product.variants.color.map((color) => (
                   <option key={color} value={color}>
@@ -129,12 +137,14 @@ export default function ProductCard({ product }: Props) {
               </select>
             </div>
 
-            <div className="mb-4">
-              <label className="block mb-1 font-medium">Size:</label>
+            <div className="mb-3">
+              <label className="block text-sm font-medium mb-1 text-gray-700">
+                Size
+              </label>
               <select
                 value={selectedSize}
                 onChange={(e) => setSelectedSize(e.target.value)}
-                className="w-full border border-gray-300 rounded-md p-2"
+                className="w-full border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-1 focus:ring-indigo-500"
               >
                 {product.variants.size.map((size) => (
                   <option key={size} value={size}>
@@ -144,19 +154,21 @@ export default function ProductCard({ product }: Props) {
               </select>
             </div>
 
-            <div className="mb-4">
-              <label className="block mb-1 font-medium">Quantity:</label>
+            <div className="mb-3">
+              <label className="block text-sm font-medium mb-1 text-gray-700">
+                Quantity
+              </label>
               <input
                 type="number"
                 min={1}
                 max={5}
                 value={quantity}
                 onChange={handleChange}
-                className="w-full border border-gray-300 rounded-md p-2"
+                className="w-full border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-1 focus:ring-indigo-500"
               />
               {error && <p className="text-sm text-red-600 mt-1">{error}</p>}
-              <p className="text-lg font-semibold mt-2">
-                {product.currency} {formattedPrice} × {quantity} ={" "}
+              <p className="mt-2 text-sm font-medium text-gray-700">
+                Total: {product.currency}{" "}
                 {(Number(formattedPrice) * quantity).toFixed(2)}
               </p>
             </div>
@@ -164,26 +176,24 @@ export default function ProductCard({ product }: Props) {
             <div className="flex flex-col sm:flex-row justify-end gap-2 sm:gap-4 mt-4">
               <button
                 onClick={() => setShowModal(false)}
-                className="px-5 py-2 rounded-md border border-gray-500 bg-white text-gray-700 hover:bg-gray-100 transition"
+                className="px-4 py-2 text-sm rounded-md border border-gray-400 text-gray-700 bg-white hover:bg-gray-100 transition cursor-pointer"
               >
                 Cancel
               </button>
-
               <button
                 disabled={!!error}
                 onClick={handleConfirmAddToCart}
-                className={`px-5 py-2 rounded-md font-semibold text-white transition ${
+                className={`px-4 py-2 text-sm font-semibold text-white rounded-md transition ${
                   error
                     ? "bg-gray-500 cursor-not-allowed"
-                    : "bg-blue-500 hover:bg-blue-700"
+                    : "bg-indigo-600 hover:bg-indigo-700 cursor-pointer"
                 }`}
               >
                 Add to Cart
               </button>
-
               <button
                 onClick={() => router.push("/cart")}
-                className="px-5 py-2 rounded-md border border-gray-500 bg-white text-gray-700 hover:bg-gray-100 transition"
+                className="px-4 py-2 text-sm rounded-md border border-gray-400 text-gray-700 bg-white hover:bg-gray-100 transition cursor-pointer"
               >
                 Go to Cart
               </button>
